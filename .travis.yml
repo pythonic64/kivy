@@ -144,6 +144,7 @@ after_success:
       chmod 600 ~/.ssh/id_rsa;
       echo -e "Host kivy.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config;
       git clone https://github.com/kivy/kivy-sdk-packager;
+      mdfind libintl.8.dylib
       if [ "${PY}" == "3" ]; then
          yes | ./kivy-sdk-packager/osx/create-osx-bundle.sh python3 master > output.txt;
          mv Kivy.app Kivy3.app;
