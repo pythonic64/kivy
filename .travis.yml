@@ -136,12 +136,11 @@ after_success:
       chmod 600 ~/.ssh/id_rsa;
       echo -e "Host kivy.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config;
       git clone https://github.com/kivy/kivy-sdk-packager;
-      cd kivy-sdk-packager/osx;
       if [ "${PY}" == "3" ]; then
-         yes | ./create-osx-bundle.sh python3 master > output.txt;
+         yes | ./kivy-sdk-packager/osx/create-osx-bundle.sh python3 master > output.txt;
          mv Kivy.app Kivy3.app;
       else
-         ./create-osx-bundle.sh python2 master > output.txt;
+         kivy-sdk-packager/osx/create-osx-bundle.sh python2 master > output.txt;
          mv Kivy.app Kivy2.app;
       fi;
     fi;
