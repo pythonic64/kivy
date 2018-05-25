@@ -144,7 +144,7 @@ after_success:
       chmod 600 ~/.ssh/id_rsa;
       echo -e "Host kivy.org\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config;
       git clone https://github.com/kivy/kivy-sdk-packager;
-      mdfind libintl.8.dylib;
+      pushd kivy-sdk-packager;
       if [ "${PY}" == "3" ]; then
          yes | ./kivy-sdk-packager/osx/create-osx-bundle.sh python3 master > output.txt;
          mv Kivy.app Kivy3.app;
@@ -152,6 +152,7 @@ after_success:
          kivy-sdk-packager/osx/create-osx-bundle.sh python2 master > output.txt;
          mv Kivy.app Kivy2.app;
       fi;
+      popd
     fi;
   - if [ "${TRAVIS_OS_NAME}" == "linux" ] && [ "${RUN}" == "docs" ] && [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "${TRAVIS_BRANCH}" == "master" ]; then
       openssl aes-256-cbc -K $encrypted_675f1a0c317c_key -iv $encrypted_675f1a0c317c_iv -in ./kivy/tools/travis/id_rsa.enc -out ~/.ssh/id_rsa -d;
