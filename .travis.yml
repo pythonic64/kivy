@@ -148,11 +148,11 @@ after_success:
       if [ "${PY}" == "3" ]; then
          yes | ./create-osx-bundle.sh python3 master > output.txt;
          mv Kivy.app Kivy3.app;
-         ./create-osx-dmg.sh Kivy3.app
+         ./create-osx-dmg.sh Kivy3.app;
       else
          ./create-osx-bundle.sh python2 master > output.txt;
          mv Kivy.app Kivy2.app;
-         ./create-osx-dmg.sh Kivy2.app
+         ./create-osx-dmg.sh Kivy2.app;
       fi;
       popd;
     fi;
