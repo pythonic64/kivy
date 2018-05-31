@@ -1,3 +1,8 @@
+env:
+  global:
+    - KIVY_USE_SETUPTOOLS=1
+    - KIVY_SPLIT_EXAMPLES=1
+    - SERVER_IP=159.203.106.198
 matrix:
   fast_finish: true
   include:
@@ -165,7 +170,7 @@ after_success:
       openssl aes-256-cbc -K $encrypted_675f1a0c317c_key -iv $encrypted_675f1a0c317c_iv -in ./kivy/tools/travis/id_rsa.enc -out ~/.ssh/id_rsa -d;
       chmod 600 ~/.ssh/id_rsa;
       echo -e "Host 159.203.106.198\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config;
-      rsync --delete --force -r -e "ssh -p 2457" ./doc/build/html/ root@159.203.106.198:/web/docs/;
+      rsync --delete --force -r -e "ssh -p 2457" ./doc/build/html/ root@SERVER_IP:/web/docs/;
     fi;
 
 notifications:
