@@ -477,7 +477,6 @@ class TextInput(FocusBehavior, Widget):
         self._handle_right = None
         self._handle_middle = None
         self._bubble = None
-        self._lines_flags = []
         self._lines_labels = []
         self._lines_rects = []
         self._hint_text_flags = []
@@ -2609,6 +2608,7 @@ class TextInput(FocusBehavior, Widget):
     #
 
     _lines = ListProperty([])
+    _lines_flags = ListProperty([])
     _hint_text_lines = ListProperty([])
     _editable = BooleanProperty(True)
     _insert_int_pat = re.compile(u'^-?[0-9]*$')
@@ -3105,7 +3105,9 @@ class TextInput(FocusBehavior, Widget):
         self._refresh_text(text)
         self.cursor = self.get_cursor_from_index(len(text))
 
-    text = AliasProperty(_get_text, _set_text, bind=('_lines', ))
+    text = AliasProperty(_get_text, _set_text,
+                         bind=('_lines', '_lines_flags'),
+                         cache=True)
     '''Text of the widget.
 
     Creation of a simple hello world::
